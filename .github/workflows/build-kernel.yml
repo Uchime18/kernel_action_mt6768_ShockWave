@@ -244,6 +244,7 @@ jobs:
             cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         fi
         chmod 777 $GITHUB_WORKSPACE/kernel_workspace/android-kernel/scripts/clang-android.sh
+        chmod 777 $GITHUB_WORKSPACE/kernel_workspace/android-kernel/tools/build/cpio
         chmod 777 $GITHUB_WORKSPACE/kernel_workspace/android-kernel/arch/arm64/kernel/vdso/gen_vdso_offsets.sh
 
     - name: Setup ccache
