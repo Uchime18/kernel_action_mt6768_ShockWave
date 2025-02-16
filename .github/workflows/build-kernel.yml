@@ -38,6 +38,7 @@ jobs:
         echo "BUILD_TIME=$(TZ=UTC date "+%Y%m%d%H%M")" >> $GITHUB_ENV
         echo "DEVICE=$(echo ${{ env.KERNEL_CONFIG }} | sed 's!vendor/!!;s/_defconfig//;s/_user//;s/-perf//')" >> $GITHUB_ENV
         sudo apt-get update
+        sudo apt-get install cpio
         sudo apt-get install git ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev g++-multilib libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip device-tree-compiler python2 python3 binutils-aarch64-linux-gnu
         mkdir -p $GITHUB_WORKSPACE/kernel_workspace
 
@@ -242,6 +243,8 @@ jobs:
             git clone https://github.com/Jbub5/connectivity.git --depth=1
             cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
         fi
+        chmod 777 $GITHUB_WORKSPACE/kernel_workspace/android-kernel/scripts/clang-android.sh
+        chmod 777 $GITHUB_WORKSPACE/kernel_workspace/android-kernel/arch/arm64/kernel/vdso/gen_vdso_offsets.sh
 
     - name: Setup ccache
       if: env.ENABLE_CCACHE == 'true'
